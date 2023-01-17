@@ -6,10 +6,10 @@ import Photo from '../assets/img/sample.jpg'
 
 const Rental = () => {
   return (
-    <div>
-     <img src={Photo} alt="rental" className='' />
-     <div className='rental-info flex items-center justify-between'>
-         <div className='super-rating'>Super Host</div>
+    <div className=''>
+     <img src={Photo} alt="rental" className='rounded-3xl' />
+     <div className='mt-4 rental-info flex items-center justify-between'>
+         <div className='super-rating border rounded-xl border-[#4f4f4f]'>Super Host</div>
          <p className='rental-space'>Entire Apartment</p>
          <p className='number-of-beds'>2 Beds</p>
          <div className='rating flex items-center'>
