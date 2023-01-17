@@ -1,0 +1,14 @@
+
+.logo{
+  width: 90px;
+  height: 18px;
+}
+.search-bar{
+  box-shadow:  0px 1px 6px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  height: 55px;
+}
+
+.search-results{
+  width: 135px;
+}
