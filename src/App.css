@@ -12,3 +12,9 @@
 .search-results{
   width: 135px;
 }
+
+.rental-photo{
+  width: 394px;
+  height: 267px;
+  object-fit: cover;
+}
