@@ -1,9 +1,9 @@
 import React from 'react'
 
-const LocationResult = () => {
+const LocationResult = ({ cityName }) => {
   return (
     <li>
-        <p>Helsink, Finland</p>
+        <p>{cityName}, Finland</p>
     </li>
   )
 }
