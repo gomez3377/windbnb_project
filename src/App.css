@@ -1,3 +1,8 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 .logo{
   width: 90px;
@@ -13,6 +18,22 @@
   width: 135px;
 }
 
+#lightbox{
+  background-color: rgba(79, 79, 79, 0.4);
+}
+
+#full-search-bar{
+  height: 460px;
+}
+
+#guest-search{
+  width: 425px;
+}
+
+#lightbox-search-btn{
+  background-color: rgba(235, 87, 87, 0.9);
+  box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.1);
+}
 .rental-photo{
   width: 394px;
   height: 267px;

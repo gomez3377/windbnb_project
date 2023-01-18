@@ -3,22 +3,25 @@ import './App.css'
 import Header from './components/Header'
 import Main from './components/Main'
 import Stays from './assets/stays.json'
-
+import SearchLightBox from './components/SearchLightBox'
 function App() {
 
 
-
+  const [searchMode, setSearchMode] = useState(true)
   const [stays, setStays] = useState(Stays)
+  const [currentCity, setCurrentCity] = useState("Helsinki")
 
+  const cityResults = stays.filter(stay => stay.city === currentCity)
 
-  const sampleElements = stays.filter(stay => stay.city === "Helsinki")
-
-  console.log(sampleElements)
+  console.log(cityResults)
 
   return (
-    <div className="App">
+    <div className="App relative">
+      { searchMode &&
+      <SearchLightBox />
+    }
       <Header/>
-      <Main  sampleElements = {sampleElements} />
+      <Main  cityResults = {cityResults} />
 
     </div>
   )

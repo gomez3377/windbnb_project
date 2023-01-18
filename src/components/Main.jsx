@@ -2,9 +2,9 @@ import React from 'react'
 import Rental from './Rental'
 
 
-const Main = ( { sampleElements }) => {
+const Main = ( { cityResults }) => {
 
-  const rentalElements = sampleElements.map(element =>  <Rental  rental={element} />)
+  const rentalElements = cityResults.map(element =>  <Rental  rental={element} />)
   return (
     <main className='mx-20'>
         <h1 className='text-2xl font-bold'>Stays in Finland</h1>
