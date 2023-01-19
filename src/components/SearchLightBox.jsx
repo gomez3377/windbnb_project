@@ -1,26 +1,34 @@
 import React from "react";
 import { FaSearch } from "react-icons/fa";
+import DestinationFilter from "./DestinationFilter";
+import GuestCount from "./GuestCount";
+import GuestFilter from "./GuestFilter";
 import LocationResult from "./LocationResult";
 
 const SearchLightBox = ({ cities, currentCity }) => {
-  
- const [filterSettingState, setFilterSettingState] = React.useState({
-   locationFilterActive: true,
-   guestCountFilterActive: false 
- })
+  const [filterSettingState, setFilterSettingState] = React.useState({
+    locationFilterActive: false,
+    guestCountFilterActive: true,
+  });
 
   const [count, setCount] = React.useState({
     totalCount: 0,
     adults: 0,
     children: 0,
   });
- function selectCityFilter() {
-   setFilterSettingState(prevState => ({guestCountFilterActive:false, locationFilterActive:true }))
- }
+  function selectCityFilter() {
+    setFilterSettingState((prevState) => ({
+      guestCountFilterActive: false,
+      locationFilterActive: true,
+    }));
+  }
 
- function selectGuestFilter(){
-  setFilterSettingState(prevState => ({guestCountFilterActive:true, locationFilterActive:false }))
- }
+  function selectGuestFilter() {
+    setFilterSettingState((prevState) => ({
+      guestCountFilterActive: true,
+      locationFilterActive: false,
+    }));
+  }
 
   function addAdultCount() {
     setCount((prevCount) => {
@@ -70,25 +78,25 @@ const SearchLightBox = ({ cities, currentCity }) => {
 
   return (
     <div id="lightbox" className="fixed top-0 left-0 z-10 w-full h-full">
-      <section id="full-search-section" className="w-full bg-white fixed top-0 left-0">
-        <div id="full-search-bar" className=" mx-24 my-12 flex items-center justify-between rounded-2xl">
-          {/* <div id="destination-search"> */}
-            <button className="border border-solid border-[#333333] rounded-2xl w-full text-left p-3 h-full">
-              <h4 className="uppercase text-[9px]">Location</h4>
-              <p className="text-sm">{currentCity}, Finland</p>
-            </button>
+      <section
+        id="full-search-section"
+        className="w-full bg-white fixed top-0 left-0"
+      >
+        <div
+          id="full-search-bar"
+          className=" mx-24 my-12 flex items-center justify-between rounded-2xl"
+        >
+          <DestinationFilter
+            selectCityFilter={selectCityFilter}
+            currentCity={currentCity}
+            active={filterSettingState.locationFilterActive}
+          />
 
-            {/* <ul>{cityElements}</ul> */}
-          {/* </div> */}
-          {/* <div id="guest-search"> */}
-            <button
-              className="border border-solid border-[#333333] rounded-2xl w-full text-left p-3 h-full"
-              id="filted-guests"
-            >
-              <h4 className="uppercase text-[9px]">Guests</h4>
-              <p className="text-sm">{count.totalCount} Guests</p>
-            </button>
-          {/* </div> */}
+          <GuestFilter
+            count={count}
+            active={filterSettingState.guestCountFilterActive}
+            selectGuestFilter={selectGuestFilter}
+          />
 
           <button
             id="lightbox-search-btn"
@@ -97,8 +105,20 @@ const SearchLightBox = ({ cities, currentCity }) => {
             <FaSearch /> <p className="ml-2.5">Search</p>
           </button>
         </div>
+        {filterSettingState.locationFilterActive && (
+          <ul className="ml-24"> {cityElements} </ul>
+        )}
+        {filterSettingState.guestCountFilterActive && (
+          <GuestCount
+         
+            count={count}
+            addAdultCount={addAdultCount}
+            addChildrenCount={addChildrenCount}
+            subtractAdultCount={subtractAdultCount}
+            subtractChildrenCount={subtractChildrenCount}
+          />
+        )}
       </section>
-
     </div>
   );
 };

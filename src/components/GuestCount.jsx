@@ -1,8 +1,8 @@
 import React from 'react'
 
-const GuestCount = () => {
+const GuestCount = ( { count,addAdultCount,addChildrenCount,subtractAdultCount, subtractChildrenCount } ) => {
   return (
-     <div id="selectGuests">
+     <div  className="ml-[524px]" id="selectGuests">
 
             <div className="mb-12" id="adults-filter">
               <p className="font-bold text-sm">Adults</p>
