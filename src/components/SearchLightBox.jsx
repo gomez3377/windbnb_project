@@ -4,13 +4,23 @@ import LocationResult from "./LocationResult";
 
 const SearchLightBox = ({ cities, currentCity }) => {
   
-
+ const [filterSettingState, setFilterSettingState] = React.useState({
+   locationFilterActive: true,
+   guestCountFilterActive: false 
+ })
 
   const [count, setCount] = React.useState({
     totalCount: 0,
     adults: 0,
     children: 0,
   });
+ function selectCityFilter() {
+   setFilterSettingState(prevState => ({guestCountFilterActive:false, locationFilterActive:true }))
+ }
+
+ function selectGuestFilter(){
+  setFilterSettingState(prevState => ({guestCountFilterActive:true, locationFilterActive:false }))
+ }
 
   function addAdultCount() {
     setCount((prevCount) => {
