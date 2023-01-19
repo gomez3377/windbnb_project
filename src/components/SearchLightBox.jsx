@@ -1,17 +1,31 @@
-import React from "react";
+import React, {useRef, useState, useEffect} from "react";
 import { FaSearch } from "react-icons/fa";
 import DestinationFilter from "./DestinationFilter";
 import GuestCount from "./GuestCount";
 import GuestFilter from "./GuestFilter";
 import LocationResult from "./LocationResult";
 
-const SearchLightBox = ({ cities, currentCity }) => {
-  const [filterSettingState, setFilterSettingState] = React.useState({
+const SearchLightBox = ({ cities, currentCity}) => {
+  // const lightboxRef = useRef()
+  // useEffect(() => {
+  //   const closeLightbox = e => {
+  //     // // if(e.path[0].tagName !== lightboxRef.current){
+  //     //   setSearchMode(false)
+  //     console.log(e)
+  //     // }
+  //   }
+  //   document.body.addEventListener('click', closeLightbox)
+
+  //   return () => document.body.removeEventListener('click', closeLightbox)
+  // },[])
+
+
+  const [filterSettingState, setFilterSettingState] = useState({
     locationFilterActive: false,
     guestCountFilterActive: true,
   });
 
-  const [count, setCount] = React.useState({
+  const [count, setCount] = useState({
     totalCount: 0,
     adults: 0,
     children: 0,
@@ -70,15 +84,16 @@ const SearchLightBox = ({ cities, currentCity }) => {
         : { ...prevCount };
     });
   }
-  console.log(cities);
+
 
   const cityElements = cities.map((city) => (
-    <LocationResult className="location-result" cityName={city} />
+    <LocationResult key={city.id} id={city.id} className="location-result" cityName={city.cityName} />
   ));
 
   return (
     <div id="lightbox" className="fixed top-0 left-0 z-10 w-full h-full">
       <section
+        // ref={lightboxRef}
         id="full-search-section"
         className="w-full bg-white fixed top-0 left-0"
       >
