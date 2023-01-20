@@ -5,7 +5,7 @@ import GuestCount from "./GuestCount";
 import GuestFilter from "./GuestFilter";
 import LocationResult from "./LocationResult";
 
-const SearchLightBox = ({ cities, currentCity}) => {
+const SearchLightBox = ({ cities, currentCity, changeCurrentCity}) => {
   // const lightboxRef = useRef()
   // useEffect(() => {
   //   const closeLightbox = e => {
@@ -87,7 +87,7 @@ const SearchLightBox = ({ cities, currentCity}) => {
 
 
   const cityElements = cities.map((city) => (
-    <LocationResult key={city.id} id={city.id} className="location-result" cityName={city.cityName} />
+    <LocationResult key={city.id} id={city.id} changeCurrentCity={changeCurrentCity} className="location-result" cityName={city.cityName} />
   ));
 
   return (

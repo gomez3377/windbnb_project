@@ -1,9 +1,9 @@
 import React from 'react'
 import { FaMapMarkerAlt } from 'react-icons/fa'
 
-const LocationResult = ({ cityName, id }) => {
+const LocationResult = ({ cityName, id, changeCurrentCity }) => {
   return (
-    <li id={id} className='flex items-center text-[#4f4f4f] mb-9 cursor-pointer'>
+    <li onClick={() => changeCurrentCity(id)} id={id} className='flex items-center text-[#4f4f4f] mb-9 cursor-pointer'>
       <FaMapMarkerAlt className='ml-4 text-sm' />
         <p className='ml-2.5 text-sm'>{cityName}, Finland</p>
     </li>

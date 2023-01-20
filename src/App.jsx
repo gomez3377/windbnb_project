@@ -19,8 +19,16 @@ function App() {
  
 
   function changeCurrentCity(currentId) {
-    set
-  }
+    
+      for(let i = 0; i < cities.length; i++){
+        if(cities[i].id === currentId) {
+          setCurrentCity(cities[i].cityName)
+        }
+        
+      }
+    }
+  
+  
   
 
 function filterCities () {
@@ -42,11 +50,12 @@ useEffect(() => {
 
   const cityResults = stays.filter(stay => stay.city === currentCity)
  
-
+console.log(cities)
+console.log(currentCity)
   return (
     <div className="App relative">
       { searchMode &&
-      <SearchLightBox currentCity={currentCity} cities={cities} />
+      <SearchLightBox changeCurrentCity={changeCurrentCity} currentCity={currentCity} cities={cities} />
     }
       <Header searchModeActive={() => setSearchMode(prev => !prev)} currentCity={currentCity}/>
       <Main  cityResults = {cityResults} />
