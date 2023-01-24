@@ -90,16 +90,25 @@ function App() {
   }
 
   const cityResults = stays.filter((stay) => {
-    return (currentCity ? stay.city === currentCity
-      : stay.city)});
 
-  const numberOfGuestResults = stays.filter(
-    (stay) => {
-      return (numberOfGuests.totalCount ? 
-        stay.maxGuests >= numberOfGuests.totalCount:
-        stay.maxGuests)}
-  );
+    const filteredArray = []
+    if(currentCity || numberOfGuests.totalCount){
+      if(currentCity && stay.cityName === currentCity){
+       filteredArray.push(stay)
+      }
+      
+    }
+  console.log(filteredArray)
+  })
+    
 
+  // const numberOfGuestResults = stays.filter(
+  //   (stay) => {
+  //     return (numberOfGuests.totalCount ? 
+  //       stay.maxGuests >= numberOfGuests.totalCount:
+  //       stay.maxGuests)}
+  // );
+console.log(cityResults)
   return (
     <div className="App relative">
       {searchMode && (
@@ -120,7 +129,7 @@ function App() {
       />
       <Main
         cityResults={cityResults}
-        numberOfGuestResults={numberOfGuestResults}
+        //  numberOfGuestResults={numberOfGuestResults}
       />
     </div>
   );
