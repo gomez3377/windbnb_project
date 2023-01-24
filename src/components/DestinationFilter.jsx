@@ -11,7 +11,7 @@ const DestinationFilter = ({ currentCity, active, selectCityFilter }) => {
    
     <button onClick={selectCityFilter} className={buttonStyle}>
     <h4 className="uppercase text-[9px]">Location</h4>
-    <p className="text-sm">{currentCity}, Finland</p>
+    <p className="text-sm">{currentCity ? `${currentCity}, Finland` : "Add Location"}</p>
     </button>
     
   

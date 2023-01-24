@@ -1,17 +1,18 @@
 import React from 'react'
 import Rental from './Rental'
+import { nanoid } from 'nanoid'
 
 
 const Main = ( { cityResults, numberOfGuestResults }) => {
 
-// function filterResults() {
+function filterResults() {
 
-// }
+}
 
-console.log(cityResults, numberOfGuestResults)
+console.log(numberOfGuestResults)
 
   // const rentalElements = cityResults.map(element =>  <Rental  rental={element} />)
-  const rentalElements = cityResults.map(element =>  <Rental  rental={element} />)
+  const rentalElements = cityResults.map(element =>  <Rental key={nanoid()} rental={element} />)
   return (
     <main className='mx-20'>
         <h1 className='text-2xl font-bold'>Stays in Finland</h1>

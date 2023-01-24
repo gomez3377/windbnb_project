@@ -13,7 +13,7 @@ const GuestFilter = ({ count, active, selectGuestFilter } ) => {
               onClick={selectGuestFilter}
             >
               <h4 className="uppercase text-[9px]">Guests</h4>
-              <p className="text-sm">{count.totalCount} Guests</p>
+              <p className="text-sm">{count.totalCount ? `${count.totalCount} ${count.totalCount > 1 ? "guests" : "guest"}` : "Add guests"}</p>
             </button>
     </>
   )

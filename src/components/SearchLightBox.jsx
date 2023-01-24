@@ -5,7 +5,7 @@ import GuestCount from "./GuestCount";
 import GuestFilter from "./GuestFilter";
 import LocationResult from "./LocationResult";
 
-const SearchLightBox = ({ cities, currentCity, changeCurrentCity, totalGuests,  changingNumberofGuests}) => {
+const SearchLightBox = ({ cities, currentCity, changeCurrentCity, totalGuests, addChildrenCount, addAdultCount, subtractAdultCount, subtractChildrenCount }) => {
   // const lightboxRef = useRef()
   // useEffect(() => {
   //   const closeLightbox = e => {
@@ -83,7 +83,10 @@ const SearchLightBox = ({ cities, currentCity, changeCurrentCity, totalGuests,  
           <GuestCount
          
            totalGuests={totalGuests}
-            changingNumberofGuests={changingNumberofGuests}
+            addAdultCount={addAdultCount}
+            addChildrenCount={addChildrenCount}
+            subtractAdultCount={subtractAdultCount}
+            subtractChildrenCount={subtractChildrenCount}
           />
         )}
       </section>

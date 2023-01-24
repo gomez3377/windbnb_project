@@ -10,7 +10,7 @@ function App() {
   const [searchMode, setSearchMode] = useState(false);
   const [stays, setStays] = useState(Stays);
   const [cities, setCities] = useState(filterCities);
-  const [currentCity, setCurrentCity] = useState("Helsinki");
+  const [currentCity, setCurrentCity] = useState("");
   const [numberOfGuests, setNumberOfGuests] = useState({
     totalCount: 0,
     adults: 0,
@@ -34,12 +34,9 @@ function App() {
     return cityObject;
   }
 
-  function changingNumberofGuests(btnId) {
-    const maxNumberOfGuests = 10;
-
-    if (btnId === "add-children-btn") {
+  function addChildrenCount() {
       setNumberOfGuests((prevCount) => {
-        return prevCount < maxNumberOfGuests
+        return prevCount.totalCount < 10
           ? {
               ...prevCount,
               children: prevCount.children + 1,
@@ -47,7 +44,8 @@ function App() {
             }
           : prevCount;
       });
-    } else if (btnId === "subtract-children-btn") {
+    } 
+    function subtractChildrenCount() {
       setNumberOfGuests((prevCount) => {
         return prevCount.children > 0
           ? {
@@ -57,9 +55,10 @@ function App() {
             }
           : prevCount;
       });
-    } else if (btnId === "add-adult-btn") {
+    } 
+    function addAdultCount() {
       setNumberOfGuests((prevCount) => {
-        return prevCount < maxNumberOfGuests
+        return prevCount.totalCount < 10
           ? {
               ...prevCount,
               adults: prevCount.adults + 1,
@@ -67,7 +66,8 @@ function App() {
             }
           : prevCount;
       });
-    } else {
+    } 
+    function subtractAdultCount() {
       setNumberOfGuests((prevCount) => {
         return prevCount.adults > 0
           ? {
@@ -78,7 +78,7 @@ function App() {
           : { ...prevCount };
       });
     }
-  }
+  
 
   useEffect(() => {
     document.addEventListener("keydown", detectKeydown, true);
@@ -89,10 +89,15 @@ function App() {
     }
   }
 
-  const cityResults = stays.filter((stay) => stay.city === currentCity);
+  const cityResults = stays.filter((stay) => {
+    return (currentCity ? stay.city === currentCity
+      : stay.city)});
 
   const numberOfGuestResults = stays.filter(
-    (stay) => stay.maxGuests >= numberOfGuests
+    (stay) => {
+      return (numberOfGuests.totalCount ? 
+        stay.maxGuests >= numberOfGuests.totalCount:
+        stay.maxGuests)}
   );
 
   return (
@@ -103,7 +108,10 @@ function App() {
           currentCity={currentCity}
           cities={cities}
           totalGuests={numberOfGuests}
-          changingNumberofGuests={changingNumberofGuests}
+          addChildrenCount={addChildrenCount}
+          addAdultCount={addAdultCount}
+          subtractAdultCount={subtractAdultCount}
+          subtractChildrenCount={subtractChildrenCount}
         />
       )}
       <Header
