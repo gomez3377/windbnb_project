@@ -2,8 +2,15 @@ import React from 'react'
 import Rental from './Rental'
 
 
-const Main = ( { cityResults }) => {
+const Main = ( { cityResults, numberOfGuestResults }) => {
 
+// function filterResults() {
+
+// }
+
+console.log(cityResults, numberOfGuestResults)
+
+  // const rentalElements = cityResults.map(element =>  <Rental  rental={element} />)
   const rentalElements = cityResults.map(element =>  <Rental  rental={element} />)
   return (
     <main className='mx-20'>

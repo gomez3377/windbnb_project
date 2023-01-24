@@ -1,6 +1,6 @@
 import React from 'react'
 
-const GuestCount = ( { count,addAdultCount,addChildrenCount,subtractAdultCount, subtractChildrenCount } ) => {
+const GuestCount = ( { totalGuests, changingNumberofGuests } ) => {
   return (
      <div  className="ml-[600px]" id="selectGuests">
 
@@ -9,14 +9,14 @@ const GuestCount = ( { count,addAdultCount,addChildrenCount,subtractAdultCount, 
               <p className="text-[#bdbdbd] text-sm">Ages 13 or above</p>
               <div className="count-container flex items-center">
                 <button
-                  onClick={subtractAdultCount}
+                  onClick={() => changingNumberofGuests("subtract-adult-btn")}
                   className="border border-solid border-[#828282] rounded text-sm flex items-center justify-center w-6 h-6 text-[#828282]"
                   >
                   -
                 </button>
-                <p className="m-4">{count.adults}</p>
+                <p className="m-4">{totalGuests.adults}</p>
                 <button
-                  onClick={addAdultCount}
+                  onClick={() => changingNumberofGuests("add-adult-btn")}
                   className="border border-solid border-[#828282] rounded text-sm flex items-center justify-center w-6 h-6 text-[#828282]"
                   >
                   +
@@ -28,14 +28,14 @@ const GuestCount = ( { count,addAdultCount,addChildrenCount,subtractAdultCount, 
               <p className="text-[#bdbdbd] text-sm">Ages 2-12</p>
               <div className="count-container flex items-center">
                 <button
-                  onClick={subtractChildrenCount}
+                  onClick={() => changingNumberofGuests("subtract-children-btn")}
                   className="border border-solid border-[#828282] rounded text-sm flex items-center justify-center w-6 h-6 text-[#828282]"
                   >
                   -
                 </button>
-                <p className="m-4">{count.children}</p>
+                <p className="m-4">{totalGuests.children}</p>
                 <button
-                  onClick={addChildrenCount}
+                  onClick={() => changingNumberofGuests("add-children-btn")}
                   className="border border-solid border-[#828282] rounded text-sm flex items-center justify-center w-6 h-6 text-[#828282]"
                   >
                   +

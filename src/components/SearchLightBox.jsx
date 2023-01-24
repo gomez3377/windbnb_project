@@ -5,7 +5,7 @@ import GuestCount from "./GuestCount";
 import GuestFilter from "./GuestFilter";
 import LocationResult from "./LocationResult";
 
-const SearchLightBox = ({ cities, currentCity, changeCurrentCity}) => {
+const SearchLightBox = ({ cities, currentCity, changeCurrentCity, totalGuests,  changingNumberofGuests}) => {
   // const lightboxRef = useRef()
   // useEffect(() => {
   //   const closeLightbox = e => {
@@ -25,11 +25,7 @@ const SearchLightBox = ({ cities, currentCity, changeCurrentCity}) => {
     guestCountFilterActive: true,
   });
 
-  const [count, setCount] = useState({
-    totalCount: 0,
-    adults: 0,
-    children: 0,
-  });
+  
   function selectCityFilter() {
     setFilterSettingState((prevState) => ({
       guestCountFilterActive: false,
@@ -44,47 +40,7 @@ const SearchLightBox = ({ cities, currentCity, changeCurrentCity}) => {
     }));
   }
 
-  function addAdultCount() {
-    setCount((prevCount) => {
-      return {
-        ...prevCount,
-        adults: prevCount.adults + 1,
-        totalCount: prevCount.totalCount + 1,
-      };
-    });
-  }
-  function addChildrenCount() {
-    setCount((prevCount) => {
-      return {
-        ...prevCount,
-        children: prevCount.children + 1,
-        totalCount: prevCount.totalCount + 1,
-      };
-    });
-  }
-  function subtractAdultCount() {
-    setCount((prevCount) => {
-      return prevCount.adults > 0
-        ? {
-            ...prevCount,
-            adults: prevCount.adults - 1,
-            totalCount: prevCount.totalCount - 1,
-          }
-        : { ...prevCount };
-    });
-  }
-  function subtractChildrenCount() {
-    setCount((prevCount) => {
-      return prevCount.children > 0
-        ? {
-            ...prevCount,
-            children: prevCount.children - 1,
-            totalCount: prevCount.totalCount - 1,
-          }
-        : { ...prevCount };
-    });
-  }
-
+ 
 
   const cityElements = cities.map((city) => (
     <LocationResult key={city.id} id={city.id} changeCurrentCity={changeCurrentCity} className="location-result" cityName={city.cityName} />
@@ -108,7 +64,7 @@ const SearchLightBox = ({ cities, currentCity, changeCurrentCity}) => {
           />
 
           <GuestFilter
-            count={count}
+            count={totalGuests}
             active={filterSettingState.guestCountFilterActive}
             selectGuestFilter={selectGuestFilter}
           />
@@ -126,11 +82,8 @@ const SearchLightBox = ({ cities, currentCity, changeCurrentCity}) => {
         {filterSettingState.guestCountFilterActive && (
           <GuestCount
          
-            count={count}
-            addAdultCount={addAdultCount}
-            addChildrenCount={addChildrenCount}
-            subtractAdultCount={subtractAdultCount}
-            subtractChildrenCount={subtractChildrenCount}
+           totalGuests={totalGuests}
+            changingNumberofGuests={changingNumberofGuests}
           />
         )}
       </section>
