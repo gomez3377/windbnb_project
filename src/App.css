@@ -10,7 +10,7 @@
 }
 .search-bar{
   box-shadow:  0px 1px 6px rgba(0, 0, 0, 0.1);
-  width: 300px;
+  width: 18.75rem;
   height: 55px;
 }
 
@@ -43,8 +43,8 @@
 .location-result{
   font-family: 'Mulish', sans-serif;
 }
-.rental-photo{
+/* .rental-photo{
   width: 394px;
   height: 267px;
   object-fit: cover;
-}
+} */

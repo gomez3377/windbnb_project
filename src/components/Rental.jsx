@@ -7,7 +7,7 @@ import { FaStar } from 'react-icons/fa'
 const Rental = ({ rental }) => {
   return (
     <div>
-     <img src={rental.photo} alt="rental" className='rental-photo rounded-3xl' />
+     <img src={rental.photo} alt="rental" className='object-cover w-full rounded-3xl h-[269px] ' />
      <div className='mt-4 rental-info flex items-center justify-between text-s'>
          {rental.superHost && <p className='super-rating border rounded-xl border-[#4f4f4f] text-[#4f4f4f]
          px-2.5 py-1.5 text-xs uppercase font-bold'>Super Host</p>}
