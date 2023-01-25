@@ -111,7 +111,6 @@ function App() {
 
   }
 
-console.log(results)
   
 
   // const numberOfGuestResults = stays.filter(
