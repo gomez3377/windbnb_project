@@ -16,6 +16,7 @@ function App() {
     adults: 0,
     children: 0,
   });
+  const [results, setResults] = useState(filterResults());
   function changeCurrentCity(currentId) {
     for (let i = 0; i < cities.length; i++) {
       if (cities[i].id === currentId) {
@@ -35,80 +36,91 @@ function App() {
   }
 
   function addChildrenCount() {
-      setNumberOfGuests((prevCount) => {
-        return prevCount.totalCount < 10
-          ? {
-              ...prevCount,
-              children: prevCount.children + 1,
-              totalCount: prevCount.totalCount + 1,
-            }
-          : prevCount;
-      });
-    } 
-    function subtractChildrenCount() {
-      setNumberOfGuests((prevCount) => {
-        return prevCount.children > 0
-          ? {
-              ...prevCount,
-              children: prevCount.children - 1,
-              totalCount: prevCount.totalCount - 1,
-            }
-          : prevCount;
-      });
-    } 
-    function addAdultCount() {
-      setNumberOfGuests((prevCount) => {
-        return prevCount.totalCount < 10
-          ? {
-              ...prevCount,
-              adults: prevCount.adults + 1,
-              totalCount: prevCount.totalCount + 1,
-            }
-          : prevCount;
-      });
-    } 
-    function subtractAdultCount() {
-      setNumberOfGuests((prevCount) => {
-        return prevCount.adults > 0
-          ? {
-              ...prevCount,
-              adults: prevCount.adults - 1,
-              totalCount: prevCount.totalCount - 1,
-            }
-          : { ...prevCount };
-      });
-    }
-  
+    setNumberOfGuests((prevCount) => {
+      return prevCount.totalCount < 10
+        ? {
+            ...prevCount,
+            children: prevCount.children + 1,
+            totalCount: prevCount.totalCount + 1,
+          }
+        : prevCount;
+    });
+  }
+  function subtractChildrenCount() {
+    setNumberOfGuests((prevCount) => {
+      return prevCount.children > 0
+        ? {
+            ...prevCount,
+            children: prevCount.children - 1,
+            totalCount: prevCount.totalCount - 1,
+          }
+        : prevCount;
+    });
+  }
+  function addAdultCount() {
+    setNumberOfGuests((prevCount) => {
+      return prevCount.totalCount < 10
+        ? {
+            ...prevCount,
+            adults: prevCount.adults + 1,
+            totalCount: prevCount.totalCount + 1,
+          }
+        : prevCount;
+    });
+  }
+  function subtractAdultCount() {
+    setNumberOfGuests((prevCount) => {
+      return prevCount.adults > 0
+        ? {
+            ...prevCount,
+            adults: prevCount.adults - 1,
+            totalCount: prevCount.totalCount - 1,
+          }
+        : { ...prevCount };
+    });
+  }
 
   useEffect(() => {
     document.addEventListener("keydown", detectKeydown, true);
   }, []);
   const detectKeydown = (e) => {
-    if (e.key === "Escape") {
+    if (e.key === "j") {
       setSearchMode((prev) => !prev);
+  
+
     }
+  };
+  useEffect(() => {
+    setResults(filterResults());
+  }, [searchMode]);
+
+  function filterResults() {
+
+    if (currentCity || numberOfGuests.totalCount) {
+      if (currentCity) {
+        return stays.filter(stay => stay.city === currentCity);
+       
+      } else if (numberOfGuests.totalCount) {
+        return stays.filter(stay => stay.maxGuests >= numberOfGuests.totalCount);
+       
+      }
+     
+    } else {
+      return stays
+    }
+
   }
 
-  const cityResults = stays.filter((stay) => {
-
-    const filteredArray = []
-    if(currentCity || numberOfGuests.totalCount){
-      if(currentCity && stay.cityName === currentCity){
-       filteredArray.push(stay)
-      }
-      
-    }
-  console.log(filteredArray)
-  })
-    
+console.log(results)
+  
 
   // const numberOfGuestResults = stays.filter(
   //   (stay) => {
-  //     return (numberOfGuests.totalCount ? 
+  //     return (numberOfGuests.totalCount ?
   //       stay.maxGuests >= numberOfGuests.totalCount:
   //       stay.maxGuests)}
   // );
-console.log(cityResults)
+
   return (
     <div className="App relative">
       {searchMode && (
@@ -128,7 +140,7 @@ console.log(cityResults)
         currentCity={currentCity}
       />
       <Main
-        cityResults={cityResults}
+        cityResults={results}
         //  numberOfGuestResults={numberOfGuestResults}
       />
     </div>
