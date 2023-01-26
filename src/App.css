@@ -22,6 +22,10 @@
   background-color: rgba(79, 79, 79, 0.4);
 }
 
+#lightbox-tag{
+  font-family: 'Muli', sans-serif;
+}
+
 #full-search-section{
   height: 460px;
   

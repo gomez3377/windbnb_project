@@ -1,11 +1,21 @@
-import React, {useRef, useState, useEffect} from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import DestinationFilter from "./DestinationFilter";
 import GuestCount from "./GuestCount";
 import GuestFilter from "./GuestFilter";
 import LocationResult from "./LocationResult";
 
-const SearchLightBox = ({ cities, currentCity, changeCurrentCity, totalGuests, addChildrenCount, addAdultCount, subtractAdultCount, subtractChildrenCount }) => {
+const SearchLightBox = ({
+  cities,
+  currentCity,
+  changeCurrentCity,
+  totalGuests,
+  addChildrenCount,
+  addAdultCount,
+  subtractAdultCount,
+  subtractChildrenCount,
+  lightboxDesktopStyle
+}) => {
   // const lightboxRef = useRef()
   // useEffect(() => {
   //   const closeLightbox = e => {
@@ -19,13 +29,14 @@ const SearchLightBox = ({ cities, currentCity, changeCurrentCity, totalGuests, a
   //   return () => document.body.removeEventListener('click', closeLightbox)
   // },[])
 
+ 
+
 
   const [filterSettingState, setFilterSettingState] = useState({
     locationFilterActive: false,
     guestCountFilterActive: true,
   });
 
-  
   function selectCityFilter() {
     setFilterSettingState((prevState) => ({
       guestCountFilterActive: false,
@@ -40,10 +51,14 @@ const SearchLightBox = ({ cities, currentCity, changeCurrentCity, totalGuests, a
     }));
   }
 
- 
-
   const cityElements = cities.map((city) => (
-    <LocationResult key={city.id} id={city.id} changeCurrentCity={changeCurrentCity} className="location-result" cityName={city.cityName} />
+    <LocationResult
+      key={city.id}
+      id={city.id}
+      changeCurrentCity={changeCurrentCity}
+      className="location-result"
+      cityName={city.cityName}
+    />
   ));
 
   return (
@@ -53,6 +68,7 @@ const SearchLightBox = ({ cities, currentCity, changeCurrentCity, totalGuests, a
         id="full-search-section"
         className="w-full bg-white fixed top-0 left-0"
       >
+        {!lightboxDesktopStyle && <p id="lightbox-tag" className="text-xs font-bold">Edit Your Search</p>}
         <div
           id="full-search-bar"
           className=" mx-24 my-12 flex items-center justify-between rounded-2xl"
@@ -81,8 +97,7 @@ const SearchLightBox = ({ cities, currentCity, changeCurrentCity, totalGuests, a
         )}
         {filterSettingState.guestCountFilterActive && (
           <GuestCount
-         
-           totalGuests={totalGuests}
+            totalGuests={totalGuests}
             addAdultCount={addAdultCount}
             addChildrenCount={addChildrenCount}
             subtractAdultCount={subtractAdultCount}

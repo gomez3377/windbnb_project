@@ -17,6 +17,36 @@ function App() {
     children: 0,
   });
   const [results, setResults] = useState(filterResults());
+  const [width, setWindowWidth] = useState(0);
+
+  const updateDimensions = () => {
+    const width = window.innerWidth;
+    setWindowWidth(width);
+  };
+  useEffect(() => {
+    document.addEventListener("keydown", detectKeydown, true);
+
+    updateDimensions();
+    window.addEventListener("resize", updateDimensions);
+
+    return () => window.removeEventListener("resize", updateDimensions);
+  }, []);
+
+  const detectKeydown = (e) => {
+    if (e.key === "j") {
+      setSearchMode((prev) => !prev);
+    }
+  };
+  useEffect(() => {
+    setResults(filterResults());
+  }, [searchMode]);
+
+  const responsive = {
+    resultGrid: width > 604
+  }
+
+
+
   function changeCurrentCity(currentId) {
     for (let i = 0; i < cities.length; i++) {
       if (cities[i].id === currentId) {
@@ -80,38 +110,19 @@ function App() {
     });
   }
 
-  useEffect(() => {
-    document.addEventListener("keydown", detectKeydown, true);
-  }, []);
-  const detectKeydown = (e) => {
-    if (e.key === "j") {
-      setSearchMode((prev) => !prev);
-  
-
-    }
-  };
-  useEffect(() => {
-    setResults(filterResults());
-  }, [searchMode]);
-
   function filterResults() {
-
     if (currentCity || numberOfGuests.totalCount) {
       if (currentCity) {
-        return stays.filter(stay => stay.city === currentCity);
-       
+        return stays.filter((stay) => stay.city === currentCity);
       } else if (numberOfGuests.totalCount) {
-        return stays.filter(stay => stay.maxGuests >= numberOfGuests.totalCount);
-       
+        return stays.filter(
+          (stay) => stay.maxGuests >= numberOfGuests.totalCount
+        );
       }
-     
     } else {
-      return stays
+      return stays;
     }
-
   }
-
-  
 
   // const numberOfGuestResults = stays.filter(
   //   (stay) => {
@@ -132,15 +143,18 @@ function App() {
           addAdultCount={addAdultCount}
           subtractAdultCount={subtractAdultCount}
           subtractChildrenCount={subtractChildrenCount}
+          lightboxDesktopStyle={responsive.resultGrid}
         />
       )}
       <Header
+        headerDesktopStyle={responsive.resultGrid}
         searchModeActive={() => setSearchMode((prev) => !prev)}
         currentCity={currentCity}
       />
       <Main
-        cityResults={results}
-        //  numberOfGuestResults={numberOfGuestResults}
+        results={results}
+        displayGrid={responsive.resultGrid}
+       
       />
     </div>
   );
